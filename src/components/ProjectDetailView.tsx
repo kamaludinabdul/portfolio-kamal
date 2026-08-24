@@ -157,13 +157,13 @@ export default function ProjectDetailView({
                 ? activeTabData.images.map((src) => (
                     <div
                       key={src}
-                      className="overflow-hidden rounded-xl shadow-lg"
+                      className="flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={src}
                         alt={activeTabData?.label ?? project.title}
-                        className="w-full"
+                        className="h-full w-full object-contain"
                       />
                     </div>
                   ))

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { Experience } from "@/lib/data";
+import { formatDuration, type Experience } from "@/lib/data";
 
 export default function ExperienceItem({
   experience,
@@ -39,6 +39,8 @@ export default function ExperienceItem({
           </h3>
           <span className="shrink-0 font-mono text-xs text-stone-500">
             {experience.period}
+            {" · "}
+            {formatDuration(experience.start, experience.end)}
           </span>
         </div>
         {experience.description && (

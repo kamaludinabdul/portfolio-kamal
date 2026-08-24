@@ -27,10 +27,40 @@ export const navLinks = [
   { href: "#skills", label: "Skills" },
 ];
 
+/**
+ * Computes a human-readable duration (e.g. "1 yr 4 mo") between two
+ * "YYYY-MM" dates. Pass "present" as end to calculate up to the current month.
+ */
+export function formatDuration(start: string, end: string): string {
+  const [startYear, startMonth] = start.split("-").map(Number);
+  const now = new Date();
+  const [endYear, endMonth] =
+    end === "present"
+      ? [now.getFullYear(), now.getMonth() + 1]
+      : end.split("-").map(Number);
+
+  let totalMonths =
+    (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+  if (totalMonths < 1) totalMonths = 1;
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  const parts: string[] = [];
+  if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+  if (months > 0) parts.push(`${months} mo${months > 1 ? "s" : ""}`);
+
+  return parts.length > 0 ? parts.join(" ") : "1 mo";
+}
+
 export type Experience = {
   role: string;
   company: string;
   period: string;
+  /** Start date used to compute duration, format: "YYYY-MM" */
+  start: string;
+  /** End date used to compute duration, format: "YYYY-MM" or "present" */
+  end: string;
   bullets?: string[];
   description?: string;
 };
@@ -40,6 +70,8 @@ export const experiences: Experience[] = [
     role: "Product Designer",
     company: "GeoSquare.ai",
     period: "Dec 2024 – Present",
+    start: "2024-12",
+    end: "present",
     bullets: [
       "Owned product discovery, user experience strategy, and interface design across multiple digital products.",
       "Worked directly with leadership to transform business opportunities into product roadmaps and validated solutions.",
@@ -54,6 +86,8 @@ export const experiences: Experience[] = [
     role: "Product Designer",
     company: "Lion Parcel",
     period: "April 2024 – Dec 2024",
+    start: "2024-04",
+    end: "2024-12",
     description:
       "Designed and maintained user-friendly mobile applications for Lion Parcel to streamline package sending, tracking, and customer point management. Developed a comprehensive web dashboard for internal use, enabling efficient shipping bookings, user management, and oversight of key logistics processes.",
   },
@@ -61,6 +95,8 @@ export const experiences: Experience[] = [
     role: "Sr. UIUX Designer",
     company: "Brighty",
     period: "Jan 2024 – Apr 2024",
+    start: "2024-01",
+    end: "2024-04",
     description:
       "Designed and implemented an ERP system from scratch to manage KOL scheduling, payments, procurement, and other critical functions within the company.",
   },
@@ -68,6 +104,8 @@ export const experiences: Experience[] = [
     role: "Mid. Product Designer",
     company: "Shipper",
     period: "May 2022 – May 2023",
+    start: "2022-05",
+    end: "2023-05",
     description:
       "Optimized logistics systems for order fulfillment, driver pickups, and sorting hub operations. Developed a Warehouse Management System to track inventory and streamline client processes. Implemented features for SKU generation, product addition, and bulk editing to enhance efficiency for e-commerce sellers.",
   },
@@ -75,6 +113,8 @@ export const experiences: Experience[] = [
     role: "Freelancer UIUX Designer",
     company: "Orenji Studio",
     period: "Feb 2022 – Dec 2023",
+    start: "2022-02",
+    end: "2023-12",
     description:
       "Helped opaper.app design and develop a user-friendly platform that streamlines cashless purchases for customers. Additionally, contributed to building merchant tools for managing orders, products, and finances, leading to a significant increase in GMV (6x) by Q2 2022.",
   },
@@ -82,6 +122,8 @@ export const experiences: Experience[] = [
     role: "Sr. UIUX Designer",
     company: "Gredu",
     period: "Oct 2021 – May 2022",
+    start: "2021-10",
+    end: "2022-05",
     bullets: [
       "Gredu rework for their raport creating.",
       "Creating Learning Management System for Kindergarten.",
@@ -91,6 +133,8 @@ export const experiences: Experience[] = [
     role: "UX Designer",
     company: "Mamikos.com",
     period: "Jan 2019 – Oct 2021",
+    start: "2019-01",
+    end: "2021-10",
     bullets: [
       "Helping tenant for searching boarding house from homepage until booking their boarding house.",
       "Supporting Mamikos internal team's work by providing design of internal tool.",
@@ -103,6 +147,8 @@ export const experiences: Experience[] = [
     role: "Support Developer",
     company: "Solusi 247",
     period: "Feb 2018 – Jan 2019",
+    start: "2018-02",
+    end: "2019-01",
     bullets: [
       "Managed new change request that proposed by user proposed in case business change or performance enhancement.",
       "Made code/program and conducted bug fixing for the application.",
@@ -114,6 +160,8 @@ export const experiences: Experience[] = [
     role: "Support Surveillance",
     company: "Solusi 247",
     period: "Oct 2016 – Feb 2018",
+    start: "2016-10",
+    end: "2018-02",
     bullets: [
       "Monitoring and maintaining daily standard operating procedure application.",
       "Talking clients through a series of actions, either face to face or over the telephone faults, providing support, including procedural documentation.",
