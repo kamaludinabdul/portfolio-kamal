@@ -22,9 +22,64 @@ export const stats = [
 
 export const navLinks = [
   { href: "#about", label: "About" },
-  { href: "#projects", label: "Work" },
   { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Work" },
+  { href: "#services", label: "Services" },
   { href: "#skills", label: "Skills" },
+];
+
+export type Service = {
+  title: string;
+  description: string;
+  items: string[];
+};
+
+export const services: Service[] = [
+  {
+    title: "MVP & Prototype for Founders",
+    description:
+      "I help founders and businesses turn an idea into a prototype or MVP that can be tested with real customers — fast.",
+    items: [
+      "Figma prototype",
+      "Simple MVP",
+      "Internal dashboard / ops system",
+      "Vibe-coded prototype for founders",
+    ],
+  },
+  {
+    title: "Kula POS Setup & Rollout",
+    description:
+      "Get your business running on Kula POS — from initial setup to hardware/integration add-ons, not just a subscription.",
+    items: [
+      "Kula POS setup",
+      "Monthly subscription plan",
+      "Hardware & integration add-ons",
+    ],
+  },
+  {
+    title: "Audit & Digitalization for Retail/Petshop Ops",
+    description:
+      "Hands-on with real operational experience — POS, inventory, grooming, pet hotel, loyalty, pricing, and reporting. I come with audit, recommendations, setup, training, and monitoring — not just software.",
+    items: [
+      "Operational audit",
+      "Recommendations",
+      "Kula POS setup",
+      "Team training",
+      "Monitoring",
+    ],
+  },
+  {
+    title: "Workshops & Training",
+    description:
+      "Half or full-day workshops for teams, campuses, or communities — practical sessions on design and AI-assisted building.",
+    items: [
+      "Figma for product teams",
+      "Product discovery",
+      "AI/vibe coding for non-programmers",
+      "Building an MVP with AI",
+      "SME digitalization",
+    ],
+  },
 ];
 
 /**

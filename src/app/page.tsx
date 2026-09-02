@@ -1,4 +1,12 @@
-import { ExternalLink, GraduationCap, Palette, Wrench, Globe } from "lucide-react";
+import {
+  ExternalLink,
+  GraduationCap,
+  Palette,
+  Wrench,
+  Globe,
+  MessageCircle,
+  Check,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
@@ -13,7 +21,12 @@ import {
   portfolioLinks,
   designerProjects,
   vibeCoderProjects,
+  services,
 } from "@/lib/data";
+
+const whatsappHref = `https://wa.me/${profile.phone}?text=${encodeURIComponent(
+  "Hi Kamaludin, saya tertarik dengan layanan kamu."
+)}`;
 
 export default function Home() {
   return (
@@ -35,15 +48,6 @@ export default function Home() {
           </div>
         </Section>
 
-        <Section id="projects" title="Selected Work" tag="portfolio --list">
-          <ProjectShowcase
-            tabs={[
-              { key: "designer", label: "As Designer", projects: designerProjects },
-              { key: "vibe-coder", label: "As Builder", projects: vibeCoderProjects },
-            ]}
-          />
-        </Section>
-
         <Section
           id="experience"
           title="Work Experience"
@@ -60,6 +64,15 @@ export default function Home() {
               />
             ))}
           </div>
+        </Section>
+
+        <Section id="projects" title="Selected Work" tag="portfolio --list">
+          <ProjectShowcase
+            tabs={[
+              { key: "designer", label: "As Designer", projects: designerProjects },
+              { key: "vibe-coder", label: "As Builder", projects: vibeCoderProjects },
+            ]}
+          />
         </Section>
 
         <Section id="other" title="Other Experience" tag="side-quests">
@@ -86,6 +99,50 @@ export default function Home() {
                 </ul>
               </div>
             ))}
+          </div>
+        </Section>
+
+        <Section id="services" title="Services" tag="hire-me">
+          <div className="grid gap-6 sm:grid-cols-2">
+            {services.map((service) => (
+              <div
+                key={service.title}
+                className="flex flex-col rounded-xl border border-[#b08d57]/15 bg-white p-6 shadow-sm"
+              >
+                <h3 className="font-semibold text-stone-900">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-stone-600">
+                  {service.description}
+                </p>
+                <ul className="mt-4 space-y-1.5">
+                  {service.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-stone-600"
+                    >
+                      <Check
+                        size={14}
+                        className="mt-0.5 shrink-0 text-[#b08d57]"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-stone-700"
+            >
+              <MessageCircle size={16} />
+              Get in Touch via WhatsApp
+            </a>
           </div>
         </Section>
 
