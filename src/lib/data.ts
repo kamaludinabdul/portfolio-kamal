@@ -210,6 +210,15 @@ export type Experience = {
   current?: boolean;
   bullets?: string[];
   description?: string;
+  /** Product shots shown under the role; files live in /public/experience/<company>/ */
+  images?: ExperienceImage[];
+};
+
+export type ExperienceImage = {
+  src: string;
+  caption: string;
+  /** Phone-sized screen: shown whole in the thumbnail instead of cropped */
+  mobile?: boolean;
 };
 
 export const experiences: Experience[] = [
@@ -238,6 +247,16 @@ export const experiences: Experience[] = [
       "Collaborated with developers throughout implementation to ensure high-quality user experiences.",
       "Continuously analyzed user feedback and product metrics to drive iterative improvements.",
     ],
+    images: [
+      {
+        src: "/experience/geosquare/horizon-landing.png",
+        caption: "Horizon: landing page with a preview of the Studio map editor",
+      },
+      {
+        src: "/experience/geosquare/horizon-sign-in.png",
+        caption: "Horizon: sign-in over a live grid-coordinate backdrop",
+      },
+    ],
   },
   {
     role: "Product Designer",
@@ -247,6 +266,13 @@ export const experiences: Experience[] = [
     end: "2024-12",
     description:
       "Designed and maintained mobile apps for sending, tracking, and customer point management, plus an internal web dashboard for shipping bookings, user management, and logistics oversight.",
+    images: [
+      {
+        src: "/experience/lion-parcel/customer-home.webp",
+        caption: "Customer app: home with Parcel Poin, shipping services and promos",
+        mobile: true,
+      },
+    ],
   },
   {
     role: "Sr. UI/UX Designer",
@@ -256,6 +282,24 @@ export const experiences: Experience[] = [
     end: "2024-04",
     description:
       "Designed an ERP system from scratch to manage KOL scheduling, payments, procurement, and other critical functions.",
+    images: [
+      {
+        src: "/experience/brighty/kol-profiles.webp",
+        caption: "Marketing: KOL profiles with per-platform slots and CPM",
+      },
+      {
+        src: "/experience/brighty/procurement.webp",
+        caption: "ERP: procurement requests by department with approval progress",
+      },
+      {
+        src: "/experience/brighty/non-marketplace-orders.webp",
+        caption: "ERP: non-marketplace orders with a status summary",
+      },
+      {
+        src: "/experience/brighty/goods-receipt.webp",
+        caption: "ERP: goods receipt with batch, expiry and production code",
+      },
+    ],
   },
   {
     role: "Mid. Product Designer",
@@ -265,6 +309,34 @@ export const experiences: Experience[] = [
     end: "2023-05",
     description:
       "Optimized logistics systems for order fulfillment, driver pickups, and sorting hubs. Built a Warehouse Management System with SKU generation, product creation, and bulk editing for e-commerce sellers.",
+    images: [
+      {
+        src: "/experience/shipper/handover-web.png",
+        caption: "Agent dashboard: handover check-in by sticker, order or AWB",
+      },
+      {
+        src: "/experience/shipper/handover-driver.png",
+        caption: "Driver app: handover history",
+        mobile: true,
+      },
+      {
+        src: "/experience/shipper/return-order-web.png",
+        caption: "Agent dashboard: return order tracking",
+      },
+      {
+        src: "/experience/shipper/return-driver.png",
+        caption: "Driver app: return & drop-off pickups",
+        mobile: true,
+      },
+      {
+        src: "/experience/shipper/fulfillment-analytics.png",
+        caption: "Fulfillment analytics: inbound, outbound and best sellers",
+      },
+      {
+        src: "/experience/shipper/wms-tenant-management.png",
+        caption: "WMS: tenant management with inbound and outbound SLAs",
+      },
+    ],
   },
   {
     role: "Freelance UI/UX Designer",
@@ -274,6 +346,23 @@ export const experiences: Experience[] = [
     end: "2023-12",
     description:
       "Helped opaper.app design a platform for cashless purchases and merchant tools for orders, products, and finances, contributing to a 6x increase in GMV by Q2 2022.",
+    images: [
+      {
+        src: "/experience/orenji/order-detail.png",
+        caption: "Merchant app: order detail with table number and WhatsApp invoice",
+        mobile: true,
+      },
+      {
+        src: "/experience/orenji/statistics.png",
+        caption: "Merchant app: sales by payment method and order status",
+        mobile: true,
+      },
+      {
+        src: "/experience/orenji/ingredients.png",
+        caption: "Merchant app: ingredient stock with low-stock flags",
+        mobile: true,
+      },
+    ],
   },
   {
     role: "Sr. UI/UX Designer",
@@ -298,6 +387,16 @@ export const experiences: Experience[] = [
       "Built the owner dashboard for managing listings and bookings.",
       "Helped owners boost their listings with MamiAds.",
       "Designed MamiAds cross-selling with the Mamikos subscription plan.",
+    ],
+    images: [
+      {
+        src: "/experience/mamikos/homepage.png",
+        caption: "Tenant homepage with kos search",
+      },
+      {
+        src: "/experience/mamikos/desktop-flow.png",
+        caption: "Web desktop flow, from homepage to listing pages",
+      },
     ],
   },
   {

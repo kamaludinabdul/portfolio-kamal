@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import { formatDuration, type Experience } from "@/lib/data";
+import ExperienceGallery from "@/components/ExperienceGallery";
 
 const VISIBLE_BULLETS = 2;
 
 export default function ExperienceItem({ experience }: { experience: Experience }) {
   const [expanded, setExpanded] = useState(false);
-  const { role, company, period, start, end, current, description, bullets } =
+  const { role, company, period, start, end, current, description, bullets, images } =
     experience;
 
   const hiddenCount = bullets ? bullets.length - VISIBLE_BULLETS : 0;
@@ -65,6 +66,10 @@ export default function ExperienceItem({ experience }: { experience: Experience 
             {expanded ? <Minus size={14} /> : <Plus size={14} />}
             {expanded ? "Show less" : `${hiddenCount} more`}
           </button>
+        )}
+
+        {images && images.length > 0 && (
+          <ExperienceGallery images={images} company={company} />
         )}
       </div>
     </li>
