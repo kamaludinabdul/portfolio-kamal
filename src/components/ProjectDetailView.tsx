@@ -21,16 +21,16 @@ export default function ProjectDetailView({
     project.tabs.find((t) => t.id === activeTab) ?? project.tabs[0];
 
   return (
-    <div className="canvas-grid grid min-h-[calc(100vh-72px)] grid-cols-1 lg:grid-cols-[380px_1fr]">
+    <div className="grid min-h-[calc(100vh-64px)] grid-cols-1 lg:grid-cols-[400px_1fr]">
       {/* Sidebar: project detail + accordion */}
-      <aside className="border-b border-[#b08d57]/20 bg-white/70 p-6 backdrop-blur-sm lg:sticky lg:top-[72px] lg:h-[calc(100vh-72px)] lg:overflow-y-auto lg:border-b-0 lg:border-r">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#b08d57]">
+      <aside className="border-b border-line bg-surface p-5 sm:p-8 lg:sticky lg:top-[64px] lg:h-[calc(100vh-64px)] lg:overflow-y-auto lg:border-r lg:border-b-0">
+        <p className="font-mono text-xs tracking-wide text-accent uppercase">
           {project.eyebrow}
         </p>
-        <h1 className="mt-2 text-xl font-semibold leading-snug text-stone-900">
+        <h1 className="mt-3 text-2xl leading-tight font-semibold tracking-tight text-ink">
           {project.title}
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-stone-600">
+        <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
           {project.summary}
         </p>
 
@@ -39,23 +39,23 @@ export default function ProjectDetailView({
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-[#b08d57]/30 bg-white px-3.5 py-1.5 text-xs font-medium text-stone-700 transition-colors hover:border-[#b08d57] hover:text-[#b08d57]"
+            className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-accent"
           >
             Visit live site <ArrowUpRight size={13} />
           </a>
         )}
 
         {project.stats && (
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line">
             {project.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-lg border border-[#b08d57]/15 bg-white px-3 py-3 text-center"
+                className="bg-surface px-4 py-3"
               >
-                <p className="text-lg font-semibold text-stone-900">
+                <p className="text-xl font-semibold tracking-tight text-ink">
                   {stat.value}
                 </p>
-                <p className="mt-0.5 text-[11px] leading-tight text-stone-500">
+                <p className="mt-0.5 text-xs leading-tight text-muted">
                   {stat.label}
                 </p>
               </div>
@@ -69,17 +69,17 @@ export default function ProjectDetailView({
             return (
               <div
                 key={section.id}
-                className="overflow-hidden rounded-lg border border-[#b08d57]/15 bg-white"
+                className="overflow-hidden rounded-xl border border-line bg-surface"
               >
                 <button
                   onClick={() => setOpenSection(isOpen ? undefined : section.id)}
-                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-stone-800 transition-colors hover:bg-[#faf7f2]"
+                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium text-ink transition-colors hover:bg-paper"
                 >
                   {section.title}
                   <motion.span
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="text-stone-400"
+                    className="text-muted"
                   >
                     <ChevronDown size={16} />
                   </motion.span>
@@ -93,10 +93,10 @@ export default function ProjectDetailView({
                       transition={{ duration: 0.2 }}
                       className="overflow-hidden"
                     >
-                      <div className="space-y-2 px-4 pb-4 font-mono text-xs leading-relaxed text-stone-600">
+                      <div className="space-y-2.5 px-4 pb-4 text-sm leading-relaxed text-ink-soft">
                         {section.content.map((line, i) => (
                           <p key={i} className="flex gap-2">
-                            <span className="text-[#b08d57]">▸</span>
+                            <span className="mt-[0.65em] h-px w-3 shrink-0 bg-ink/30" />
                             <span>{line}</span>
                           </p>
                         ))}
@@ -112,7 +112,7 @@ export default function ProjectDetailView({
 
       {/* Main: tab switcher + stacked screens */}
       <div className="flex flex-col">
-        <div className="flex gap-1 overflow-x-auto border-b border-[#b08d57]/20 bg-white/60 px-4 py-2 backdrop-blur-sm">
+        <div className="flex gap-1 overflow-x-auto border-b border-line bg-paper/90 px-3 py-2 backdrop-blur-sm lg:sticky lg:top-[64px] lg:z-10">
           {project.tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -121,14 +121,14 @@ export default function ProjectDetailView({
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative shrink-0 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? "text-stone-900"
-                    : "text-stone-500 hover:text-stone-800"
+                    ? "text-ink"
+                    : "text-muted hover:text-ink"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="tab-pill"
-                    className="absolute inset-0 rounded-md bg-[#b08d57]/10"
+                    className="absolute inset-0 rounded-md bg-ink/[0.06]"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -138,7 +138,7 @@ export default function ProjectDetailView({
           })}
         </div>
 
-        <div className="flex-1 space-y-6 overflow-y-auto p-6 sm:p-10">
+        <div className="flex-1 space-y-6 p-4 sm:p-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTabData?.id}
@@ -149,7 +149,7 @@ export default function ProjectDetailView({
               className="mx-auto flex w-full max-w-4xl flex-col gap-6"
             >
               {activeTabData?.description && (
-                <p className="text-sm leading-relaxed text-stone-600">
+                <p className="max-w-2xl text-[15px] leading-relaxed text-ink-soft">
                   {activeTabData.description}
                 </p>
               )}
@@ -157,76 +157,28 @@ export default function ProjectDetailView({
                 ? activeTabData.images.map((src) => (
                     <div
                       key={src}
-                      className="flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg"
+                      className="overflow-hidden rounded-xl border border-line bg-surface shadow-[0_24px_60px_-30px_rgba(18,18,20,0.35)]"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={src}
                         alt={activeTabData?.label ?? project.title}
-                        className="h-full w-full object-contain"
+                        className="w-full"
                       />
                     </div>
                   ))
-                : Array.from({ length: activeTabData?.screens ?? 1 }).map(
-                    (_, i) => (
-                      <PlaceholderScreen
-                        key={i}
-                        gradient={project.accentGradient}
-                        label={activeTabData?.label ?? project.title}
-                      />
-                    )
+                : (
+                    <div className="flex aspect-video flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-ink/15 bg-surface text-center">
+                      <span className="font-mono text-xs tracking-wide text-muted uppercase">
+                        Screen coming soon
+                      </span>
+                      <span className="text-lg font-semibold tracking-tight text-ink">
+                        {activeTabData?.label ?? project.title}
+                      </span>
+                    </div>
                   )}
             </motion.div>
           </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PlaceholderScreen({
-  gradient,
-  label,
-}: {
-  gradient: string;
-  label: string;
-}) {
-  return (
-    <div className="frame-corners overflow-hidden rounded-xl border border-[#b08d57]/20 bg-stone-900 shadow-lg">
-      {/* fake browser/app top bar */}
-      <div className="flex items-center gap-2 border-b border-white/10 bg-stone-950 px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#e8a3a3]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#e8d3a3]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#a8cbb7]" />
-        <span
-          className={`ml-3 rounded bg-gradient-to-r ${gradient} bg-clip-text font-mono text-xs font-medium text-transparent`}
-        >
-          {label}
-        </span>
-      </div>
-
-      {/* fake screen body */}
-      <div className="relative flex aspect-video items-center justify-center bg-gradient-to-br from-stone-900 via-stone-900 to-stone-800 p-6">
-        <div className="w-full max-w-sm space-y-3 opacity-40">
-          <div className={`h-2 w-1/3 rounded-full bg-gradient-to-r ${gradient}`} />
-          <div className="h-2 w-full rounded-full bg-white/10" />
-          <div className="h-2 w-5/6 rounded-full bg-white/10" />
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <div className="h-14 rounded-md bg-white/5" />
-            <div className="h-14 rounded-md bg-white/5" />
-            <div className="h-14 rounded-md bg-white/5" />
-          </div>
-          <div className="h-2 w-2/3 rounded-full bg-white/10" />
-        </div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
-          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
-            Screenshot coming soon
-          </span>
-          <span
-            className={`bg-gradient-to-r ${gradient} bg-clip-text px-6 font-mono text-sm font-medium text-transparent`}
-          >
-            {label}
-          </span>
         </div>
       </div>
     </div>

@@ -1,7 +1,5 @@
 // Detailed content for each project's case study page (/projects/[slug]).
-// Every project can have a different set of sections and tabs — this is
-// just dummy/placeholder content so the template can be reviewed.
-// TODO: replace with real points once you finalize each case study.
+// Every project can have a different set of sections and tabs.
 
 export type ProjectSection = {
   id: string;
@@ -12,7 +10,6 @@ export type ProjectSection = {
 export type ProjectTab = {
   id: string;
   label: string;
-  screens: number; // how many stacked placeholder screens to render (ignored if images is set)
   description?: string; // explains what this screen shows/does
   images?: string[]; // real screenshots, e.g. "/projects/kulapos/dashboard.png"
 };
@@ -29,61 +26,9 @@ export type ProjectDetail = {
   summary: string;
   sections: ProjectSection[];
   tabs: ProjectTab[];
-  accentGradient: string; // tailwind gradient classes, matches card gradient
   stats?: ProjectStat[];
   liveUrl?: string;
 };
-
-const dummySections: ProjectSection[] = [
-  {
-    id: "overview",
-    title: "Product Overview",
-    content: [
-      "One or two sentences on what this product is and who it's for.",
-      "Replace this with the real problem statement and context.",
-    ],
-  },
-  {
-    id: "role",
-    title: "My Role & Scope",
-    content: [
-      "Designed the core flows end to end, from research to high-fidelity UI.",
-      "Collaborated with engineering to ship the feature within the sprint.",
-      "Owned the design system components used across the module.",
-    ],
-  },
-  {
-    id: "problem",
-    title: "The Problem",
-    content: [
-      "Describe the pain point or business need that triggered this project.",
-      "Add a metric or quote if available, e.g. drop-off rate, support tickets.",
-    ],
-  },
-  {
-    id: "process",
-    title: "Process & Exploration",
-    content: [
-      "Summarize research, wireframes, and key decisions made along the way.",
-      "Mention any A/B tests or usability sessions that shaped the outcome.",
-    ],
-  },
-  {
-    id: "outcome",
-    title: "Outcome & Impact",
-    content: [
-      "State the measurable result, e.g. conversion up X%, time-to-task down Y%.",
-      "Add a short reflection on what you'd do differently next time.",
-    ],
-  },
-];
-
-const dummyTabs: ProjectTab[] = [
-  { id: "overview", label: "Overview", screens: 1 },
-  { id: "flow-a", label: "Flow A", screens: 2 },
-  { id: "flow-b", label: "Flow B", screens: 1 },
-  { id: "settings", label: "Settings", screens: 2 },
-];
 
 export const projectDetails: Record<string, ProjectDetail> = {
   "mamikos-lqs-gamification": {
@@ -167,74 +112,51 @@ export const projectDetails: Record<string, ProjectDetail> = {
       {
         id: "score-detail",
         label: "Skor Kos Detail",
-        screens: 1,
         description:
           "Detail screen showing the owner's current Listing Quality Score (e.g. 50/100), a status label like 'Kos Kurang Informatif', and a checklist of concrete steps to raise the score — each with a point value.",
       },
       {
         id: "onboarding",
         label: "Onboarding",
-        screens: 1,
         description:
           "A short onboarding moment introducing what LQS is, why it matters, and how completing listing data benefits the owner — shown the first time this feature appears.",
       },
       {
         id: "edit-data",
         label: "Edit Data Kos",
-        screens: 1,
         description:
           "The edit-listing form where prioritized fields (like description and house rules) are marked and positioned first, guiding owners to fill in the data that matters most for their score.",
       },
       {
         id: "dashboard",
         label: "Owner Dashboard",
-        screens: 1,
         description:
           "Owner home dashboard with an entry-point card nudging incomplete profiles to boost their LQS, alongside balance, points, and general listing management.",
       },
     ],
-    accentGradient: "from-[#e8c9a3] to-[#b08d57]",
-  },
-  "project-title-two": {
-    slug: "project-title-two",
-    eyebrow: "Case Study",
-    title: "Project Title Two — replace with the real product name",
-    summary:
-      "Placeholder summary. Replace with a 2-3 sentence description of the product, the problem it solves, and your role.",
-    sections: dummySections,
-    tabs: dummyTabs,
-    accentGradient: "from-[#cbb7e0] to-[#8a6dab]",
-  },
-  "project-title-three": {
-    slug: "project-title-three",
-    eyebrow: "Case Study",
-    title: "Project Title Three — replace with the real product name",
-    summary:
-      "Placeholder summary. Replace with a 2-3 sentence description of the product, the problem it solves, and your role.",
-    sections: dummySections,
-    tabs: dummyTabs,
-    accentGradient: "from-[#a8cbb7] to-[#5c8a70]",
   },
   kulapos: {
     slug: "kulapos",
-    eyebrow: "AI-Built Product",
-    title: "Kulapos.id — AI Business OS & Multi-Industry POS",
+    eyebrow: "Founder project · Kulapos.id",
+    title: "Kula OS — AI Business Operating System & Smart POS",
     summary:
-      "An AI-powered operating system and point-of-sale app for Indonesian SMEs — covering retail, F&B, pharmacy, laundry, PS/billiard rental, pet shop & clinic, and print/convection businesses, all in one platform. I designed and built the product end-to-end using AI-assisted coding tools.",
+      "Kula OS by Kulapos.id is an AI business operating system and smart POS for Indonesian SMEs — built for retail, F&B, pharmacy, and laundry, with automatic control features for PS/billiard rental, pet shop & clinic, and screen printing/convection/craft. I designed and built the product end-to-end using AI-assisted coding tools.",
     liveUrl: "https://kulapos.id/landing",
     stats: [
-      { value: "108+", label: "Active users" },
-      { value: "20.4K+", label: "Total transactions" },
+      { value: "270+", label: "Active users" },
+      { value: "50,502+", label: "Total transactions" },
+      { value: "121,068+", label: "Products sold" },
       { value: "99.9%", label: "Uptime" },
-      { value: "10", label: "Industries served" },
+      { value: "24/7", label: "Support" },
+      { value: "10+", label: "Industries served" },
     ],
     sections: [
       {
         id: "overview",
         title: "Product Overview",
         content: [
-          "Kula POS is a smart, offline-first cashier app and AI business operating system for retail, F&B, pharmacy, and laundry — plus specialized control features for PS/billiard rental, pet shop & clinic, and print/convection/craft businesses.",
-          "One platform adapts to 10+ industries: retail, F&B, pharmacy, laundry, general rental, PS/game center, pet shop, pet clinic, workshop/automotive, and barbershop/salon.",
+          "Kula OS is a smart, offline-first cashier app and AI business operating system for retail, F&B, pharmacy, and laundry — plus specialized control features for PS/billiard rental, pet shop & clinic, and print/convection/craft businesses.",
+          "One platform adapts to 10+ industries: retail, F&B, pharmacy, laundry, general rental, PS/game center, pet shop, pet clinic, screen printing/convection/craft, workshop/automotive, and barbershop/salon.",
         ],
       },
       {
@@ -272,7 +194,7 @@ export const projectDetails: Record<string, ProjectDetail> = {
         id: "outcome",
         title: "Traction & Impact",
         content: [
-          "108+ active businesses and 20,434+ total transactions processed to date.",
+          "270+ active users, 50,502+ transactions processed, and 121,068+ products sold to date.",
           "99.9% uptime with 24/7 support, built on an offline-first architecture so cashiers keep running without internet.",
           "Serves everything from pharmacies (BPOM-compliant, auto etiquette printing) to PS rental arenas and pet clinics.",
         ],
@@ -282,7 +204,6 @@ export const projectDetails: Record<string, ProjectDetail> = {
       {
         id: "dashboard",
         label: "Dashboard",
-        screens: 1,
         images: ["/projects/kulapos/dashboard.png"],
         description:
           "Owner-facing overview: total orders, gross/net profit, receivables, transaction count, low/out-of-stock alerts, order-by-category breakdown, daily order trend chart, best-selling menu, and latest transactions — all in one glance.",
@@ -290,7 +211,6 @@ export const projectDetails: Record<string, ProjectDetail> = {
       {
         id: "pos",
         label: "Kasir POS",
-        screens: 1,
         images: ["/projects/kulapos/pos.png"],
         description:
           "The cashier flow: searchable product grid with category filters and stock badges, plus a live cart panel to pick dine-in/takeaway, apply discounts or vouchers, and check out in a couple of taps.",
@@ -298,7 +218,6 @@ export const projectDetails: Record<string, ProjectDetail> = {
       {
         id: "ps-rental",
         label: "Rental & TV Agent",
-        screens: 1,
         images: ["/projects/kulapos/ps-rental.png"],
         description:
           "Live unit monitor for PS/billiard rentals — each table/unit shows its status (available/in-use), hourly rate, and a running countdown timer. Kula TV Agent auto-switches the TV to HDMI and locks it once the paid session ends.",
@@ -306,7 +225,6 @@ export const projectDetails: Record<string, ProjectDetail> = {
       {
         id: "reports",
         label: "Laporan",
-        screens: 1,
         images: ["/projects/kulapos/reports.png"],
         description:
           "Profit & loss report with a break-even point (BEP) simulator, financial health score (gross/net margin, opex ratio), AI-generated financial recommendations, and a shift audit log to catch cash discrepancies per cashier.",
@@ -314,22 +232,9 @@ export const projectDetails: Record<string, ProjectDetail> = {
       {
         id: "ai-copilot",
         label: "Copilot AI",
-        screens: 1,
-        images: ["/projects/kulapos/ai-copilot.png"],
         description:
           "Kula Copilot's AI feature set: scan a supplier invoice to auto-fill stock, generate promo copy/vouchers, get smart restock recommendations, and control the POS via voice commands.",
       },
     ],
-    accentGradient: "from-[#a3c4e8] to-[#4f7cab]",
-  },
-  "ai-built-project-two": {
-    slug: "ai-built-project-two",
-    eyebrow: "AI-Built Project",
-    title: "AI-Built Project Two — replace with the real product name",
-    summary:
-      "Placeholder summary. Replace with what you built, the AI tools/stack used, and the result.",
-    sections: dummySections,
-    tabs: dummyTabs,
-    accentGradient: "from-[#e8a3a3] to-[#ab4f4f]",
   },
 };

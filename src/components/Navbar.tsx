@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { navLinks, profile } from "@/lib/data";
 
 const NAVBAR_OFFSET = 72;
@@ -17,6 +18,7 @@ function scrollToHash(hash: string) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("");
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -24,7 +26,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -46,9 +48,7 @@ export default function Navbar() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
-          }
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
         });
       },
       { rootMargin: `-${NAVBAR_OFFSET + 40}px 0px -60% 0px` }
@@ -58,11 +58,11 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, [isHome]);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const goTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setOpen(false);
 
     if (!isHome) {
-      // Navigate back to the homepage first, then scroll once it's loaded.
       router.push(`/${href}`);
       return;
     }
@@ -73,6 +73,7 @@ export default function Navbar() {
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    setOpen(false);
 
     if (!isHome) {
       router.push("/");
@@ -83,48 +84,102 @@ export default function Navbar() {
     setActive("");
   };
 
+  const solid = scrolled || open;
+
   return (
     <header
-      className={`sticky top-0 z-50 transition-all ${
-        scrolled
-          ? "border-b border-[#b08d57]/15 bg-[#faf7f2]/90 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
+      className={`sticky top-0 z-50 transition-colors ${
+        solid
+          ? "border-b border-line bg-paper/85 backdrop-blur-md"
+          : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
+      <nav className="mx-auto flex h-[64px] w-full max-w-6xl items-center justify-between px-4 sm:px-8">
         <a
           href="#top"
           onClick={handleLogoClick}
-          className="font-mono text-sm font-medium text-stone-900 transition-transform active:scale-95"
+          className="flex items-center gap-2.5 text-[15px] font-semibold tracking-tight text-ink"
         >
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-sm leading-none font-bold text-paper">
+            K
+          </span>
           {profile.shortName}
-          <span className="text-[#b08d57]">.ai</span>
         </a>
-        <ul className="flex items-center gap-6 text-sm text-stone-600">
-          {navLinks.map((link) => (
-            <li key={link.href} className="relative">
-              <a
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                className={`relative inline-block py-1 transition-colors active:scale-95 ${
-                  active === link.href
-                    ? "text-stone-900"
-                    : "hover:text-[#b08d57]"
-                }`}
-              >
-                {link.label}
-                {active === link.href && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute -bottom-0.5 left-0 h-[2px] w-full bg-[#b08d57]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </a>
-            </li>
-          ))}
+
+        <ul className="hidden items-center gap-1 text-sm md:flex">
+          {navLinks.map((link) => {
+            const isActive = active === link.href;
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={(e) => goTo(e, link.href)}
+                  className={`relative block rounded-full px-3.5 py-1.5 transition-colors ${
+                    isActive ? "text-ink" : "text-muted hover:text-ink"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-ink/[0.06]"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
+
+        <div className="flex items-center gap-2">
+          <a
+            href="#contact"
+            onClick={(e) => goTo(e, "#contact")}
+            className="group flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-accent"
+          >
+            Let&apos;s talk
+            <ArrowUpRight
+              size={14}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface text-ink md:hidden"
+          >
+            {open ? <X size={16} /> : <Menu size={16} />}
+          </button>
+        </div>
       </nav>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-line px-4 md:hidden"
+          >
+            {navLinks.map((link) => (
+              <li key={link.href} className="border-b border-line last:border-b-0">
+                <a
+                  href={link.href}
+                  onClick={(e) => goTo(e, link.href)}
+                  className="flex items-center justify-between py-3.5 text-base text-ink"
+                >
+                  {link.label}
+                  <span className="font-mono text-xs text-muted">{link.href}</span>
+                </a>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

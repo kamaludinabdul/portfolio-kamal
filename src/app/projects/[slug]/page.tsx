@@ -3,11 +3,13 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ProjectDetailView from "@/components/ProjectDetailView";
-import { allProjects } from "@/lib/data";
+import { projects } from "@/lib/data";
 import { projectDetails } from "@/lib/projectDetails";
 
 export function generateStaticParams() {
-  return allProjects.map((project) => ({ slug: project.slug }));
+  return projects
+    .filter((project) => project.caseStudy)
+    .map((project) => ({ slug: project.slug }));
 }
 
 export default async function ProjectDetailPage({
@@ -25,12 +27,12 @@ export default async function ProjectDetailPage({
   return (
     <>
       <Navbar />
-      <div className="border-b border-[#b08d57]/15 bg-white/60 px-6 py-3 sm:px-8">
+      <div className="border-b border-line bg-paper px-4 py-3 sm:px-8">
         <Link
-          href="/#projects"
-          className="inline-flex items-center gap-1.5 text-sm text-stone-600 transition-colors hover:text-[#b08d57]"
+          href="/#work"
+          className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink"
         >
-          <ArrowLeft size={14} /> Back to Selected Work
+          <ArrowLeft size={14} /> Back to case studies
         </Link>
       </div>
       <ProjectDetailView project={project} />

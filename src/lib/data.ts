@@ -1,34 +1,118 @@
 export const profile = {
   name: "Kamaludin Abdul Basit NS",
   shortName: "Kamaludin",
-  role: "Product Designer",
-  tagline: "Designs the interface, ships it with code.",
+  headline: "Founder & builder of Kulapos.id",
   phone: "6285712905780",
   email: "kamaludinabdulbasit@gmail.com",
   linkedin: "https://www.linkedin.com/in/kamaludin-abdul-basit-63299060/",
   dribbble: "https://dribbble.com/abdul_basit94",
-  intro: [
-    "Hi, I'm Kamaludin, a Product Designer with 7 years of experience designing digital products for web and mobile platforms. I specialize in transforming research insights and business requirements into intuitive, user-centered experiences.",
-    "My expertise includes UX research, user interviews, usability testing, design systems, interaction design, and AI-assisted rapid prototyping. I leverage AI-powered development tools to quickly build interactive prototypes, validate product ideas, and collaborate more effectively with stakeholders and engineers.",
-    "I'm passionate about bridging design, product strategy, and emerging AI workflows to create impactful digital experiences.",
-  ],
+  kulapos: "https://kulapos.id/landing",
 };
 
-export const stats = [
-  { value: "7+", label: "Years in product design" },
-  { value: "9", label: "Companies & startups" },
-  { value: "2", label: "Hats: designer & builder" },
-];
+export function whatsappLink(message: string) {
+  return `https://wa.me/${profile.phone}?text=${encodeURIComponent(message)}`;
+}
 
 export const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Work" },
+  { href: "#now", label: "Now" },
+  { href: "#kulapos", label: "Kulapos" },
   { href: "#services", label: "Services" },
-  { href: "#skills", label: "Skills" },
+  { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
 ];
 
+/* ------------------------------------------------------------------ */
+/* Now                                                                 */
+/* ------------------------------------------------------------------ */
+
+export type NowItem = {
+  verb: string;
+  title: string;
+  role: string;
+  description: string;
+  href: string;
+  external?: boolean;
+};
+
+export const nowItems: NowItem[] = [
+  {
+    verb: "Building",
+    title: "Kulapos.id",
+    role: "Founder & builder",
+    description:
+      "Maker of Kula OS, an AI business operating system and smart POS for Indonesian SMEs. On the side I ship smaller products like Struki and Masak Apa Besok. I own the product, the design, and the code.",
+    href: "#kulapos",
+  },
+  {
+    verb: "Designing",
+    title: "GeoSquare.ai",
+    role: "Product Designer · since Dec 2024",
+    description:
+      "Enterprise dashboards, mapping experiences, and data visualization, from product discovery to shipped UI.",
+    href: "#experience",
+  },
+  {
+    verb: "Helping",
+    title: "Founders & SMEs",
+    role: "Services & workshops",
+    description:
+      "MVPs for founders, Kula POS rollouts, retail and petshop ops audits, and workshops on building with AI.",
+    href: "#services",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Kulapos                                                             */
+/* ------------------------------------------------------------------ */
+
+export const kulaposStats = [
+  { value: "270+", label: "Active users" },
+  { value: "50.5K+", label: "Transactions processed" },
+  { value: "121K+", label: "Products sold" },
+  { value: "99.9%", label: "Uptime · 24/7 support" },
+];
+
+export const kulaposIndustries = [
+  "Retail",
+  "F&B",
+  "Pharmacy",
+  "Laundry",
+  "General rental",
+  "PS / game center",
+  "Pet shop",
+  "Pet clinic",
+  "Printing, convection & craft",
+  "Workshop & automotive",
+  "Barbershop & salon",
+];
+
+export const kulaposCopilot = [
+  {
+    title: "AI Scan Faktur",
+    description:
+      "Snap a supplier invoice. Copilot reads items, qty, and prices, then syncs stock.",
+  },
+  {
+    title: "AI Restock Advisor",
+    description:
+      "Reads sales velocity and low stock, then drafts a smart purchase order.",
+  },
+  {
+    title: "AI Voucher & Copywriter",
+    description: "Turns a few inputs into promo copy and ready-to-use vouchers.",
+  },
+  {
+    title: "AI Voice POS",
+    description: "Run the cashier flow and close payments by voice.",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Services                                                            */
+/* ------------------------------------------------------------------ */
+
 export type Service = {
+  audience: string;
   title: string;
   description: string;
   items: string[];
@@ -36,20 +120,22 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: "MVP & Prototype for Founders",
+    audience: "For founders",
+    title: "MVP & Prototype",
     description:
-      "I help founders and businesses turn an idea into a prototype or MVP that can be tested with real customers — fast.",
+      "Turn an idea into a prototype or MVP you can put in front of real customers, fast.",
     items: [
       "Figma prototype",
       "Simple MVP",
       "Internal dashboard / ops system",
-      "Vibe-coded prototype for founders",
+      "Vibe-coded prototype",
     ],
   },
   {
+    audience: "For store owners",
     title: "Kula POS Setup & Rollout",
     description:
-      "Get your business running on Kula POS — from initial setup to hardware/integration add-ons, not just a subscription.",
+      "Get your business running on Kula POS, from first setup to hardware and integrations. Not just a subscription.",
     items: [
       "Kula POS setup",
       "Monthly subscription plan",
@@ -57,9 +143,10 @@ export const services: Service[] = [
     ],
   },
   {
-    title: "Audit & Digitalization for Retail/Petshop Ops",
+    audience: "For retail & petshop",
+    title: "Ops Audit & Digitalization",
     description:
-      "Hands-on with real operational experience — POS, inventory, grooming, pet hotel, loyalty, pricing, and reporting. I come with audit, recommendations, setup, training, and monitoring — not just software.",
+      "Hands-on operational experience across POS, inventory, grooming, pet hotel, loyalty, pricing, and reporting. You get an audit, recommendations, setup, training, and monitoring.",
     items: [
       "Operational audit",
       "Recommendations",
@@ -69,21 +156,26 @@ export const services: Service[] = [
     ],
   },
   {
+    audience: "For teams & campuses",
     title: "Workshops & Training",
     description:
-      "Half or full-day workshops for teams, campuses, or communities — practical sessions on design and AI-assisted building.",
+      "Half- or full-day practical sessions on product design and building with AI.",
     items: [
       "Figma for product teams",
       "Product discovery",
-      "AI/vibe coding for non-programmers",
+      "AI / vibe coding for non-programmers",
       "Building an MVP with AI",
       "SME digitalization",
     ],
   },
 ];
 
+/* ------------------------------------------------------------------ */
+/* Experience                                                          */
+/* ------------------------------------------------------------------ */
+
 /**
- * Computes a human-readable duration (e.g. "1 yr 4 mo") between two
+ * Computes a human-readable duration (e.g. "1 yr 4 mos") between two
  * "YYYY-MM" dates. Pass "present" as end to calculate up to the current month.
  */
 export function formatDuration(start: string, end: string): string {
@@ -94,8 +186,7 @@ export function formatDuration(start: string, end: string): string {
       ? [now.getFullYear(), now.getMonth() + 1]
       : end.split("-").map(Number);
 
-  let totalMonths =
-    (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+  let totalMonths = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
   if (totalMonths < 1) totalMonths = 1;
 
   const years = Math.floor(totalMonths / 12);
@@ -112,21 +203,32 @@ export type Experience = {
   role: string;
   company: string;
   period: string;
-  /** Start date used to compute duration, format: "YYYY-MM" */
-  start: string;
+  /** Start date used to compute duration, format: "YYYY-MM". Omit to hide the duration. */
+  start?: string;
   /** End date used to compute duration, format: "YYYY-MM" or "present" */
-  end: string;
+  end?: string;
+  current?: boolean;
   bullets?: string[];
   description?: string;
 };
 
 export const experiences: Experience[] = [
   {
+    role: "Founder & Builder",
+    company: "Kulapos.id",
+    // TODO: add the start month (e.g. start: "2025-03", end: "present") to show a duration
+    period: "Present",
+    current: true,
+    description:
+      "Designing, building, and rolling out Kula OS, an AI business operating system and smart POS for Indonesian SMEs across 10+ industries, using AI-assisted development instead of a traditional dev team. 270+ active users, 50.5K+ transactions, and 121K+ products sold so far.",
+  },
+  {
     role: "Product Designer",
     company: "GeoSquare.ai",
     period: "Dec 2024 – Present",
     start: "2024-12",
     end: "present",
+    current: true,
     bullets: [
       "Owned product discovery, user experience strategy, and interface design across multiple digital products.",
       "Worked directly with leadership to transform business opportunities into product roadmaps and validated solutions.",
@@ -140,20 +242,20 @@ export const experiences: Experience[] = [
   {
     role: "Product Designer",
     company: "Lion Parcel",
-    period: "April 2024 – Dec 2024",
+    period: "Apr 2024 – Dec 2024",
     start: "2024-04",
     end: "2024-12",
     description:
-      "Designed and maintained user-friendly mobile applications for Lion Parcel to streamline package sending, tracking, and customer point management. Developed a comprehensive web dashboard for internal use, enabling efficient shipping bookings, user management, and oversight of key logistics processes.",
+      "Designed and maintained mobile apps for sending, tracking, and customer point management, plus an internal web dashboard for shipping bookings, user management, and logistics oversight.",
   },
   {
-    role: "Sr. UIUX Designer",
+    role: "Sr. UI/UX Designer",
     company: "Brighty",
     period: "Jan 2024 – Apr 2024",
     start: "2024-01",
     end: "2024-04",
     description:
-      "Designed and implemented an ERP system from scratch to manage KOL scheduling, payments, procurement, and other critical functions within the company.",
+      "Designed an ERP system from scratch to manage KOL scheduling, payments, procurement, and other critical functions.",
   },
   {
     role: "Mid. Product Designer",
@@ -162,26 +264,26 @@ export const experiences: Experience[] = [
     start: "2022-05",
     end: "2023-05",
     description:
-      "Optimized logistics systems for order fulfillment, driver pickups, and sorting hub operations. Developed a Warehouse Management System to track inventory and streamline client processes. Implemented features for SKU generation, product addition, and bulk editing to enhance efficiency for e-commerce sellers.",
+      "Optimized logistics systems for order fulfillment, driver pickups, and sorting hubs. Built a Warehouse Management System with SKU generation, product creation, and bulk editing for e-commerce sellers.",
   },
   {
-    role: "Freelancer UIUX Designer",
+    role: "Freelance UI/UX Designer",
     company: "Orenji Studio",
     period: "Feb 2022 – Dec 2023",
     start: "2022-02",
     end: "2023-12",
     description:
-      "Helped opaper.app design and develop a user-friendly platform that streamlines cashless purchases for customers. Additionally, contributed to building merchant tools for managing orders, products, and finances, leading to a significant increase in GMV (6x) by Q2 2022.",
+      "Helped opaper.app design a platform for cashless purchases and merchant tools for orders, products, and finances, contributing to a 6x increase in GMV by Q2 2022.",
   },
   {
-    role: "Sr. UIUX Designer",
+    role: "Sr. UI/UX Designer",
     company: "Gredu",
     period: "Oct 2021 – May 2022",
     start: "2021-10",
     end: "2022-05",
     bullets: [
-      "Gredu rework for their raport creating.",
-      "Creating Learning Management System for Kindergarten.",
+      "Reworked Gredu's report card (rapor) creation flow.",
+      "Designed a Learning Management System for kindergarten.",
     ],
   },
   {
@@ -191,11 +293,11 @@ export const experiences: Experience[] = [
     start: "2019-01",
     end: "2021-10",
     bullets: [
-      "Helping tenant for searching boarding house from homepage until booking their boarding house.",
-      "Supporting Mamikos internal team's work by providing design of internal tool.",
-      "Building owner dashboard for manage their listings and booking.",
-      "Help owner to upping their listing using mamiads.",
-      "Building crosselling mamiads with mamikos subscription plan.",
+      "Designed the tenant journey from homepage search to booking a boarding house.",
+      "Designed internal tools for Mamikos' operations team.",
+      "Built the owner dashboard for managing listings and bookings.",
+      "Helped owners boost their listings with MamiAds.",
+      "Designed MamiAds cross-selling with the Mamikos subscription plan.",
     ],
   },
   {
@@ -205,10 +307,10 @@ export const experiences: Experience[] = [
     start: "2018-02",
     end: "2019-01",
     bullets: [
-      "Managed new change request that proposed by user proposed in case business change or performance enhancement.",
-      "Made code/program and conducted bug fixing for the application.",
-      "As Contact Point for advanced technical problem matters including change request, problem and etc. Perform some Data Analysis with the goal supporting decision making.",
-      "Provide technical advice and expertise to support the development, implementation, support and administration.",
+      "Handled change requests for business changes and performance improvements.",
+      "Wrote code and fixed bugs across the application.",
+      "Acted as contact point for advanced technical problems and ran data analysis to support decision making.",
+      "Provided technical advice for development, implementation, support, and administration.",
     ],
   },
   {
@@ -218,22 +320,20 @@ export const experiences: Experience[] = [
     start: "2016-10",
     end: "2018-02",
     bullets: [
-      "Monitoring and maintaining daily standard operating procedure application.",
-      "Talking clients through a series of actions, either face to face or over the telephone faults, providing support, including procedural documentation.",
-      "Supporting the roll-out of new applications.",
-      "Following diagrams and written instructions to repair a fault or set up a system.",
-      "Responding within agreed time limits to call outs.",
-      "Prioritizing and managing many open cases at one time.",
+      "Monitored and maintained daily standard operating procedure applications.",
+      "Walked clients through fixes face to face and by phone, including procedural documentation.",
+      "Supported the roll-out of new applications.",
+      "Managed and prioritized many open cases within agreed response times.",
     ],
   },
 ];
 
 export const otherExperience = [
   {
-    role: "UIUX Mentor",
+    role: "UI/UX Mentor",
     items: [
-      { title: "Coding ID X SAPDA Beasiswa UIUX Disabilitas", period: "May – June 2024" },
-      { title: "Coding ID X PPKD Jakarta Barat", period: "November – December 2023" },
+      { title: "Coding ID × SAPDA, UI/UX scholarship for disabilities", period: "May – Jun 2024" },
+      { title: "Coding ID × PPKD Jakarta Barat", period: "Nov – Dec 2023" },
     ],
   },
   {
@@ -241,95 +341,123 @@ export const otherExperience = [
     items: [{ title: "Shipper", period: "2022 – 2023" }],
   },
   {
-    role: "Mentor Internship",
+    role: "Internship Mentor",
     items: [{ title: "Mamikos", period: "" }],
   },
 ];
 
 export const education = {
   school: "STMIK Akakom Yogyakarta",
-  degree: "Bachelor of Teknik Informatika",
+  degree: "Bachelor of Informatics Engineering",
   year: "2012",
 };
 
-export const skills = {
-  visualDesign: ["Experience Design", "Prototype"],
-  tools: ["Sketch App", "Adobe XD", "Figma", "Miro"],
-  languages: ["Indonesian", "English"],
-};
+export const skills = [
+  {
+    group: "Product design",
+    items: [
+      "UX research",
+      "User interviews",
+      "Usability testing",
+      "Design systems",
+      "Interaction design",
+    ],
+  },
+  {
+    group: "Building",
+    items: ["AI-assisted coding", "Rapid prototyping", "Next.js", "Gemini AI"],
+  },
+  {
+    group: "Tools",
+    items: ["Figma", "Miro", "Sketch", "Adobe XD"],
+  },
+  {
+    group: "Languages",
+    items: ["Indonesian", "English"],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Case studies                                                        */
+/* ------------------------------------------------------------------ */
 
 export type Project = {
   slug: string;
+  kind: "Build" | "Design";
   title: string;
+  client: string;
   description: string;
   tags: string[];
   image?: string;
-  link?: string;
-  gradient: string;
+  /** "browser" frames a desktop screenshot, "phone" frames a mobile one */
+  imageFrame?: "browser" | "phone";
+  /** Background behind the framed screenshot */
+  tint?: string;
+  /** Live product URL. Cards without a case study page link here instead. */
+  url?: string;
+  /** Set when the project has a /projects/[slug] case study page */
+  caseStudy?: boolean;
+  highlight: { value: string; label: string };
 };
 
-// TODO: replace placeholder content with real case studies
-export const designerProjects: Project[] = [
-  {
-    slug: "mamikos-lqs-gamification",
-    title: "Listing Quality Score Gamification",
-    description:
-      "UX research-led gamification feature for Mamikos that nudges boarding house owners to complete their listing data to better match tenant needs.",
-    tags: ["UX Research", "Gamification", "Mamikos"],
-    link: "#",
-    gradient: "from-[#e8c9a3] to-[#b08d57]",
-  },
-  {
-    slug: "project-title-two",
-    title: "Project Title Two",
-    description:
-      "Short description of the design problem, your role, and the outcome. Replace with a real case study summary.",
-    tags: ["Mobile App", "Prototyping"],
-    link: "#",
-    gradient: "from-[#cbb7e0] to-[#8a6dab]",
-  },
-  {
-    slug: "project-title-three",
-    title: "Project Title Three",
-    description:
-      "Short description of the design problem, your role, and the outcome. Replace with a real case study summary.",
-    tags: ["Dashboard", "Data Visualization"],
-    link: "#",
-    gradient: "from-[#a8cbb7] to-[#5c8a70]",
-  },
-];
-
-// TODO: replace placeholder content with real AI-assisted / vibe-coded builds
-export const vibeCoderProjects: Project[] = [
+export const projects: Project[] = [
   {
     slug: "kulapos",
-    title: "Kulapos.id",
+    kind: "Build",
+    title: "Kula OS: AI business operating system & smart POS",
+    client: "Kulapos.id · Founder project",
     description:
-      "AI-powered POS & business operating system for Indonesian SMEs across retail, F&B, pharmacy, laundry, PS rental, and more — built and shipped with AI-assisted coding tools.",
-    tags: ["AI Copilot", "Multi-Industry POS", "Next.js"],
-    link: "https://kulapos.id/landing",
-    gradient: "from-[#a3c4e8] to-[#4f7cab]",
+      "Designed and shipped end-to-end with AI-assisted coding: offline-first cashier, accounting, stock, and an AI Copilot, adapted to 10+ industries.",
+    tags: ["Founder", "AI Copilot", "Next.js"],
+    image: "/projects/kulapos/dashboard.png",
+    imageFrame: "browser",
+    tint: "#ebe8fb",
+    url: "https://kulapos.id/landing",
+    caseStudy: true,
+    highlight: { value: "50.5K+", label: "transactions processed" },
   },
   {
-    slug: "ai-built-project-two",
-    title: "AI-Built Project Two",
+    slug: "struki",
+    kind: "Build",
+    title: "Struki: offline cashier for warung & small shops",
+    client: "Own product · Android",
     description:
-      "Short description of what you built, the AI tools/stack used, and the result. Replace with a real project.",
-    tags: ["Cursor", "Full-stack"],
-    link: "#",
-    gradient: "from-[#e8a3a3] to-[#ab4f4f]",
+      "Sales, stock, kasbon, and net profit on any Android phone, no internet needed. One-time license instead of a subscription, data stays on the device, and it works with Bluetooth printers and barcode scanners.",
+    tags: ["Android", "Offline-first", "One-time license"],
+    image: "/projects/struki/hero.jpg",
+    imageFrame: "browser",
+    tint: "#e9e7fb",
+    url: "https://struki.insyntive.com/",
+    highlight: { value: "Rp 0", label: "monthly fees, forever" },
+  },
+  {
+    slug: "masak-apa-besok",
+    kind: "Build",
+    title: "Masak Apa Besok? Tomorrow's menu, sorted",
+    client: "Own product · Web app",
+    description:
+      "Answers the nightly \"what do we cook tomorrow?\" from three small inputs: cooking time, grocery budget, and what's left in the fridge.",
+    tags: ["Consumer", "Meal planning", "Mobile web"],
+    image: "/projects/masak-apa-besok/hero.jpg",
+    imageFrame: "phone",
+    tint: "#efe2cf",
+    url: "https://makanapabesok.insyntive.com/",
+    highlight: { value: "157", label: "recipes ready to cook" },
+  },
+  {
+    slug: "mamikos-lqs-gamification",
+    kind: "Design",
+    title: "Listing Quality Score gamification",
+    client: "Mamikos.com",
+    description:
+      "Research-led gamification that nudges boarding house owners to complete listing data that actually matches what tenants look for.",
+    tags: ["UX Research", "Gamification", "Mobile"],
+    caseStudy: true,
+    highlight: { value: "1,431", label: "tenants surveyed" },
   },
 ];
 
-export const allProjects = [...designerProjects, ...vibeCoderProjects];
-
 export const portfolioLinks = [
-  {
-    label: "Case Study Portfolio",
-    url: "https://s.id/1Vvvd",
-  },
-  {
-    label: "Visual Design Portfolio",
-    url: "https://s.id/21cmX",
-  },
+  { label: "Case study deck", url: "https://s.id/1Vvvd" },
+  { label: "Visual design portfolio", url: "https://s.id/21cmX" },
 ];
