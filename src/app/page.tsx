@@ -257,14 +257,14 @@ export default function Home() {
 
         {/* Contact */}
         <section id="contact" className="px-4 pb-6 sm:px-8">
-          <div className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-3xl bg-accent px-6 py-16 text-white sm:px-14 sm:py-20">
-            <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-white/10 blur-2xl" />
-            <p className="font-mono text-xs tracking-wide text-white/70 uppercase">
+          <div className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-3xl bg-ink px-6 py-16 text-white sm:px-14 sm:py-20">
+            <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-accent/30 blur-3xl" />
+            <p className="font-mono text-xs tracking-wide text-accent-bright uppercase">
               Let&apos;s talk
             </p>
             <h2 className="mt-4 max-w-3xl text-3xl leading-[1.08] font-semibold tracking-[-0.03em] sm:text-5xl">
               Got a store to digitize or an idea to prototype?{" "}
-              <span className="text-white/65">Let&apos;s build it.</span>
+              <span className="text-white/55">Let&apos;s build it.</span>
             </h2>
             <div className="mt-10 flex flex-wrap gap-3">
               <a
